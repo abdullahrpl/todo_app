@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.exit_to_app),
           ),
         ],
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Text('Selamat Datang ${user?.displayName}')
+          ],
+        ),
       ),
     );
   }
