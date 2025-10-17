@@ -24,10 +24,16 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         message = 'berhasil login';
       });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } catch (e) {
       setState(() {
         message = 'error $e';
       });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
@@ -57,7 +63,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 TextField(
                   controller: passwordController,
+                  obscureText: pass,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          pass = !pass;
+                        });
+                      },
+                      icon: pass
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
+                    ),
                     labelText: 'Password',
                     hintText: 'Masukkan Password',
                     border: OutlineInputBorder(
@@ -74,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       login();
                     },
-                    child: Text('Login', style: TextStyle(color: Colors.white)),
+                    child: Text('Masuk', style: TextStyle(color: Colors.white)),
                   ),
                 ),
                 Row(
